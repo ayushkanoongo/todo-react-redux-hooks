@@ -1,27 +1,21 @@
 import React from 'react';
 import './App.css';
-import {connect} from 'react-redux'
 import TodosReduxContainer from './components/TodosReduxContainer';
-// import TodosContainer from './components/TodosContainer';
+import { useSelector } from 'react-redux';
 
 function App(props) {
+  const todos = useSelector(state => state.todos);
+  const inputValue = useSelector(state => state.inputValue);
   return (
     <div className="App">
       <div className="container">
         <div className="header">
           <h1>Todo List</h1>
         </div>
-        <TodosReduxContainer {...props}/>
+        <TodosReduxContainer {...props} todos={todos} inputValue={inputValue}/>
       </div>
     </div>
   );
 }
 
-const mapStateToProps = (state) => {
-  return {
-    todos: state.todos,
-    inputValue: state.inputValue
-  }
-}
-
-export default connect(mapStateToProps)(App);
+export default App;
